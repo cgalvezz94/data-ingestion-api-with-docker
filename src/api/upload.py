@@ -10,9 +10,9 @@ router = APIRouter()
 def upload_csv_data(db: Session = Depends(get_db_session)):
     try:
         # Read CSVs locally 
-        departments_df = pd.read_csv(CSV_DEPARTMENTS)
-        jobs_df = pd.read_csv(CSV_JOBS)
-        employees_df = pd.read_csv(CSV_HIRED_EMPLOYEES)
+        departments_df = pd.read_csv(CSV_DEPARTMENTS, header=None, names=['id', 'department'])
+        jobs_df = pd.read_csv(CSV_JOBS, header=None, names=['id', 'job'])
+        employees_df = pd.read_csv(CSV_HIRED_EMPLOYEES, header=None, names=['id', 'name', 'hired_date', 'department_id', 'job_id'])
 
         # Cleaning data tables
         db.query(Department).delete()
