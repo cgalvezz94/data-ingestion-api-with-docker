@@ -149,23 +149,97 @@ ment unit of all code). This style of architecture is the de facto standard for 
 Although this project fulfills the requirements of the challenge, here are some ideas for potential enhancements in a production environment:
 
 - Use a persistent database such as Amazon RDS (PostgreSQL) instead of SQLite to ensure data durability and scalability.
-
 - Implement CSV file storage and retrieval from Amazon S3 to decouple data storage from the application container.
-
 - Add more comprehensive error handling and input validation to improve robustness.
-
 - Expand automated testing coverage to include integration and load tests.
-
 - Secure API endpoints with authentication and authorization mechanisms.
-
 - Implement logging and monitoring with AWS CloudWatch or other tools for better observability.
-
 - Container orchestration with Kubernetes or ECS service autoscaling for higher availability and scalability.
 
 These improvements would make the solution more production-ready and scalable beyond the scope of the current challenge.
 
 ---
 
+## 📌 Available Endpoint
+
+1. POST /batch
+
+- Inserts a list of employees into the database.
+
+- Request
+
+  Content-Type: application/json
+  Body: JSON object containing the field employees with a list of objects.
+
+  Expected JSON format:
+
+  {
+    "employees": [
+      {
+        "id": 1,
+        "name": "John Doe",
+        "hired_date": "2024-01-15",
+        "department_id": 10,
+        "job_id": 3
+      },
+      {
+        "id": 2,
+        "name": "Jane Smith",
+        "hired_date": "2024-02-20",
+        "department_id": 12,
+        "job_id": 4
+      }
+    ]
+  }
+
+
+  📌 Constraints:
+
+  - Must contain between 1 and 1000 employees.
+  - Hired date in ISO 8601 (YYYY-MM-DD o YYYY-MM-DDTHH:MM:SS)
+  - Each employee object must have:
+
+    id (integer, required)
+    name (string, required)
+    hired_date (datetime, required)
+    department_id (integer, required)
+    job_id (integer, required)
+
+  Example request using curl:
+
+  curl -X POST http://<HOST>:<PORT>/batch/
+    -H "Content-Type: application/json" \
+    -d '{
+      "employees": [
+        {
+          "id": 1,
+          "name": "John Doe",
+          "hired_date": "2024-01-15",
+          "department_id": 10,
+          "job_id": 3
+        },
+        {
+          "id": 2,
+          "name": "Jane Smith",
+          "hired_date": "2024-02-20",
+          "department_id": 12,
+          "job_id": 4
+        }
+      ]
+    }'
+  Example successful response:
+
+  {
+    "message": "2 employees inserted successfully."
+  }
+
+  ⚠️ Error Handling
+  
+   Status Code: 400	Malformed JSON or missing required fields	{ "detail": "value_error.missing" }
+   Status Code: 500	Internal error when inserting into the database	{ "detail": "Database connection failed" }
+
+
+---
 ## ✉️ Contact / Author
 
 - **Name:** Camilo Gálvez Zúñiga  
