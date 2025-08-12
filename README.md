@@ -12,6 +12,12 @@ The goal is to design and implement a **local REST API** that:
 3. Supports **batch inserts** of up to 1000 rows in a single request.
 4. Exposes SQL-based metrics through additional API endpoints.
 
+**Assumptions**
+1. The initial CSV upload endpoint loads and manages the full master data, including departments, jobs, and employees.
+2. The batch insert endpoint only handles inserting new employees as transactions. 
+3. It is assumed that the departments and jobs referenced by new employees already exist and are valid.
+4. No batch update or batch insert is performed on departments or jobs in this version.
+
 
 The solution also includes:
 - Cloud hosting on **AWS**.
