@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 from typing import List
 from sqlalchemy.orm import Session
 from src.db_setup import get_db_session, Employee
+from datetime import datetime
 
 router = APIRouter()
 
@@ -12,7 +13,7 @@ router = APIRouter()
 class EmployeeBatchInsert(BaseModel):
     id: int
     name: str
-    hired_date: str
+    hired_date: datetime
     department_id: int
     job_id: int
 
@@ -28,7 +29,7 @@ def batch_insert(data: EmployeeBatchRequest, db: Session = Depends(get_db_sessio
             Employee(
                 id=emp.id,
                 name=emp.name,
-                datetime=emp.hired_date,
+                hired_date=emp.hired_date,
                 department_id=emp.department_id,
                 job_id=emp.job_id
             )

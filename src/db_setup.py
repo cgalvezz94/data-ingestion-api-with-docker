@@ -1,5 +1,5 @@
 # src/db_setup.py
-from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, create_engine
 from sqlalchemy.orm import relationship, declarative_base, sessionmaker
 from .config import SQLALCHEMY_DATABASE_URL
 
@@ -31,7 +31,7 @@ class Employee(Base):
     __tablename__ = "hired_employees"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    datetime = Column(String, nullable=False)
+    hired_date = Column(DateTime, nullable=False)
     department_id = Column(Integer, ForeignKey("departments.id"))
     job_id = Column(Integer, ForeignKey("jobs.id"))
 
