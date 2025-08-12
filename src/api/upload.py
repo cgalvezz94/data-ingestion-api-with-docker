@@ -14,6 +14,18 @@ def upload_csv_data(db: Session = Depends(get_db_session)):
         jobs_df = pd.read_csv(CSV_JOBS, header=None, names=['id', 'job'])
         employees_df = pd.read_csv(CSV_HIRED_EMPLOYEES, header=None, names=['id', 'name', 'hired_date', 'department_id', 'job_id'])
 
+        # Datetime issue fixed
+        employees_df['hired_date'] = pd.to_datetime(employees_df['hired_date'], utc=True)
+        employees_df['hired_date'] = employees_df['hired_date'].dt.tz_localize(None)
+
+        # Delete rows with NaN 
+        employees_df = employees_df.dropna(subset=['id', 'job_id', 'department_id', 'hired_date','name'])
+
+        # Cast as int
+        employees_df['job_id'] = employees_df['job_id'].astype(int)
+        employees_df['department_id'] = employees_df['department_id'].astype(int)
+        employees_df['id'] = employees_df['id'].astype(int)
+
         # Cleaning data tables
         db.query(Department).delete()
         db.query(Job).delete()
