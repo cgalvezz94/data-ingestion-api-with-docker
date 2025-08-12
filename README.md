@@ -173,24 +173,24 @@ These improvements would make the solution more production-ready and scalable be
 
   Expected JSON format:
 
-  {
+  valid_payload = {
     "employees": [
-      {
-        "id": 1,
-        "name": "John Doe",
-        "hired_date": "2024-01-15",
-        "department_id": 10,
-        "job_id": 3
-      },
-      {
-        "id": 2,
-        "name": "Jane Smith",
-        "hired_date": "2024-02-20",
-        "department_id": 12,
-        "job_id": 4
-      }
+        {
+            "id": 1,
+            "name": "John Doe",
+            "hired_date": "2024-01-15T00:00:00",
+            "department_id": 10,
+            "job_id": 3
+        },
+        {
+            "id": 2,
+            "name": "Jane Smith",
+            "hired_date": "2024-02-20T00:00:00",
+            "department_id": 12,
+            "job_id": 4
+        }
     ]
-  }
+}
 
 
   📌 Constraints:
