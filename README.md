@@ -239,6 +239,68 @@ These improvements would make the solution more production-ready and scalable be
    Status Code: 500	Internal error when inserting into the database	{ "detail": "Database connection failed" }
 
 
+2. GET /metrics/sql1
+
+- Executes a predefined SQL query (from sql/requirement_1.sql) and returns metrics as JSON.
+
+  Response Example:
+
+  {
+  "data": [
+    {
+      "department": "Engineering",
+      "job": "Computer Systems Analyst I",
+      "Q1": 3,
+      "Q2": 2,
+      "Q3": 0,
+      "Q4": 0
+    },
+    {
+      "department": "Sales",
+      "job": "Senior Sales Associate",
+      "Q1": 1,
+      "Q2": 1,
+      "Q3": 7,
+      "Q4": 0
+    }
+  ]
+}
+
+- Curl para Requirement 1 (GET /metrics/sql1)
+
+  curl -X GET "http://localhost:8000/metrics/sql1" -H "accept: application/json"
+
+
+3. GET /metrics/sql2
+
+- Executes a predefined SQL query (from sql/requirement_2.sql) and returns metrics as JSON.
+
+  Responde example:
+
+  {
+    "data": [
+      {
+        "id": 10,
+        "department": "Training",
+        "hired": 45
+      },
+      {
+        "id": 12,
+        "department": "Accounting",
+        "hired": 14
+      }
+    ]
+  }
+
+  - Curl para Requirement 2 (GET /metrics/sql2)
+
+    curl -X GET "http://localhost:8000/metrics/sql2" -H "accept: application/json"
+
+
+
+
+
+
 ---
 ## ✉️ Contact / Author
 
