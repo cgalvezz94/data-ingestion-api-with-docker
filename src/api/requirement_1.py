@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 from src.db_setup import get_db_session
 from src.config import SQL_REQUIREMENT_1_PATH
 
@@ -13,7 +14,7 @@ def get_requirement_1(db: Session = Depends(get_db_session)):
             query = file.read()
 
         # Execution of raw query
-        result = db.execute(query)
+        result = db.execute(text(query))
 
         # Convert result to dictionary list
         rows = [dict(row) for row in result.fetchall()]
