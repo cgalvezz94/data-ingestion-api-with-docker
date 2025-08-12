@@ -20,3 +20,7 @@ CSV_JOBS = os.path.join(DATA_DIR, "jobs.csv")
 
 # Batch insert max rows
 BATCH_SIZE = 1000
+
+# SQL script paths
+SQL_REQUIREMENT_1_PATH = os.path.join(BASE_DIR, "sql", "requirement_1.sql")
+SQL_REQUIREMENT_2_PATH = os.path.join(BASE_DIR, "sql", "requirement_2.sql")
