@@ -7,7 +7,8 @@ WORKDIR /app
 # Copy requirements file and install dependencies
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip setuptools wheel
+RUN pip install --no-cache-dir --force-reinstall -r requirements.txt
 
 # Copy the entire app code into the container
 COPY . .
@@ -17,3 +18,7 @@ EXPOSE 8000
 
 # Command to run the FastAPI app with uvicorn
 CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+
+
+
