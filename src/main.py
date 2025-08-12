@@ -10,8 +10,8 @@ app = FastAPI(
 
 app.include_router(upload.router, prefix="/upload", tags=["Upload"])
 app.include_router(batch_insert.router, prefix="/batch", tags=["Batch Insert"])
-app.include_router(requirement_1.router, prefix="/metrics/q1", tags=["Requirement 1"])
-app.include_router(requirement_2.router, prefix="/metrics/q2", tags=["Requirement 2"])
+app.include_router(requirement_1.router, prefix="/metrics/sql1", tags=["Requirement 1"])
+app.include_router(requirement_2.router, prefix="/metrics/sql2", tags=["Requirement 2"])
 
 if __name__ == "__main__":
     import uvicorn
