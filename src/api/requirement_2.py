@@ -17,7 +17,7 @@ def get_requirement_2(db: Session = Depends(get_db_session)):
         result = db.execute(text(query))
 
         # Convertir resultado a lista de diccionarios
-        rows = [dict(row) for row in result]
+        rows = [dict(row) for row in result.mappings()]
 
         return {"data": rows}
 
