@@ -1,0 +1,40 @@
+name: Deploy to Amazon ECR Public
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write       
+      contents: read        
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials from IAM Role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::302263066270:role/data-ingestion-api  
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR Public
+        run: |
+          aws ecr-public get-login-password --region us-east-1 \
+          | docker login --username AWS --password-stdin public.ecr.aws
+
+      - name: Build Docker image
+        run: docker build -t data-ingestion-api .
+
+      - name: Tag Docker image
+        run: docker tag data-ingestion-api:latest public.ecr.aws/l1v8h9k1/data-ingestion-api:latest
+
+      - name: Push Docker image to ECR Public
+        run: docker push public.ecr.aws/l1v8h9k1/data-ingestion-api:latest
+
+
