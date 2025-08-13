@@ -297,8 +297,11 @@ These improvements would make the solution more production-ready and scalable be
     curl -X GET "http://localhost:8000/metrics/sql2" -H "accept: application/json"
 
 
+---
 
+## ☁️ PULL FROM AMAZON PUBLIC ECR
 
+- Executes: docker pull public.ecr.aws/l1v8h9k1/data-ingestion-api:latest
 
 
 ---
