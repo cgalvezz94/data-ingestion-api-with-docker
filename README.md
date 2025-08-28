@@ -71,6 +71,7 @@ The solution also includes:
 
 ## Project Structure
 
+```text 
 my-project/
 ├──.github/ # Github Actions
 ├──docker/ # Dockerfile
@@ -97,6 +98,7 @@ my-project/
 │   └── __init__.py  
 ├──README.md # This file 
 └──requirements.txt # Python dependencies
+```
 
 ---
 
